@@ -1,0 +1,51 @@
+#connectionContainer{
+    width: 90%;
+    border: 1px solid black;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+}
+
+#connection1{
+    width: 50%;
+    border: 1px solid red;
+    text-align: left;
+}
+
+#destination1 {
+    font-size: larger;
+    text-align: center;
+}
+
+#lineBlock {
+    border-left: thick solid black;
+    margin-left: 20%;
+    margin-top: 10%;
+    padding-right: 5px;
+}
+
+.topCircle:before{
+    content: ' \25CF';
+    font-size: 50px;
+    margin-left: 20%;
+}
+
+.withinVerti{
+    padding-right: 5px;
+    margin-left: 20%;
+}
+
+#connection2{
+    width: 50%;
+    border: 1px solid green;
+}
+
+#connection3{
+    width: 50%;
+    border: 1px solid green;
+}
+
+#connection4{
+    width: 50%;
+    border: 1px solid green;
+}
