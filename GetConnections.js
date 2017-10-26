@@ -4,6 +4,15 @@
 
 var instantMilliSeconds = 0;
 
+/*Constants*/
+const apiBaseUrl = "http://transport.opendata.ch/v1/connections";
+const startPosition = "Wallisellen_Neugut";
+
+function getUrl(destination){
+  var date = new Date();
+  return apiBaseUrl + "?time=" + date.getHours() + ":" + date.getMinutes() + "&from=" + startPosition + "&to=" + destination;
+}
+
 var getConnections = function () {
     var HttpClient = function () {
         this.get = function (url, callBack) {
@@ -18,12 +27,14 @@ var getConnections = function () {
         }
     }
 
-    var hour = new Date().getHours();
-    var minute = new Date().getMinutes();
-    instantMilliSeconds = new Date().getMilliseconds();
+    var date = new Date();
+
+    var hour = date.getHours();
+    var minute = date.getMinutes();
+    instantMilliSeconds = date.getMilliseconds();
 
     var flugHafenConnection = new HttpClient();
-    flugHafenConnection.get('http://transport.opendata.ch/v1/connections?time=' + hour + ':' + minute + '&from=Wallisellen_Neugut&to=zurich_Flughafen_Fracht', function (response) {
+    flugHafenConnection.get(getUrl("zurich_Flughafen_Fracht"), function (response) {
         var jsonReturn = JSON.parse(response);
         var connectionLength = jsonReturn.connections.length;
         var focusedConnection, currentTime;
@@ -93,7 +104,7 @@ var getConnections = function () {
     });
 
     var HBConnection = new HttpClient();
-    HBConnection.get('http://transport.opendata.ch/v1/connections?time=' + hour + ':' + minute + '&from=Wallisellen_Neugut&to=zurich_HB', function (response) {
+    HBConnection.get(getUrl("zurich_HB"), function (response) {
         var jsonReturn = JSON.parse(response);
         var connectionLength = jsonReturn.connections.length;
         var focusedConnection, currentTime;
@@ -163,7 +174,7 @@ var getConnections = function () {
     });
 
     var ETHConnection = new HttpClient();
-    ETHConnection.get('http://transport.opendata.ch/v1/connections?time=' + hour + ':' + minute + '&from=Wallisellen_Neugut&to=zurich_ETH', function (response) {
+    ETHConnection.get(getUrl("zurich_ETH"), function (response) {
         var jsonReturn = JSON.parse(response);
         var connectionLength = jsonReturn.connections.length;
         var focusedConnection, currentTime;
@@ -233,7 +244,7 @@ var getConnections = function () {
     });
 
     var HonggConnection = new HttpClient();
-    HonggConnection.get('http://transport.opendata.ch/v1/connections?time=' + hour + ':' + minute + '&from=Wallisellen_Neugut&to=zurich_ETH_Hoenggerberg', function (response) {
+    HonggConnection.get(getUrl("zurich_ETH_Hoenggerberg"), function (response) {
         var jsonReturn = JSON.parse(response);
         var connectionLength = jsonReturn.connections.length;
         var focusedConnection, currentTime;
